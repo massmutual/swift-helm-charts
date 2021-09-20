@@ -18,6 +18,10 @@ To install the <chart-name> chart:
 
     helm install my-<chart-name> <alias>/<chart-name>
 
-To uninstall the chart:
+To install the <chart-name> chart:
+
+    helm upgrade my-<chart-name> <alias>/<chart-name>
+
+  To uninstall the chart:
 
     helm delete my-<chart-name>
