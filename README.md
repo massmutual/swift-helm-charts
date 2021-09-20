@@ -14,14 +14,20 @@ If you had already added this repo earlier, run `helm repo update` to retrieve
 the latest versions of the packages.  You can then run `helm search repo
 <alias>` to see the charts.
 
+If you want to remove repos, remove the repo as follows:
+
+    helm repo remove <alias>
+
 To install the <chart-name> chart:
 
-    helm install my-<chart-name> <alias>/<chart-name>
+    helm install my-<chart-name> <alias>/<chart-name> -n <namespace>
 
 To install the <chart-name> chart:
 
-    helm upgrade my-<chart-name> <alias>/<chart-name>
+    helm upgrade my-<chart-name> <alias>/<chart-name> -n <namespace>
 
   To uninstall the chart:
 
-    helm delete my-<chart-name>
+    helm uninstall my-<chart-name> -n <namespace>
+
+    
