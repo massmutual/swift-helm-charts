@@ -10,24 +10,4 @@ Once Helm has been set up correctly, add the repo as follows:
 
     helm repo add <alias> https://massmutual.github.io/swift-helm-charts
   
-If you had already added this repo earlier, run `helm repo update` to retrieve
-the latest versions of the packages.  You can then run `helm search repo
-<alias>` to see the charts.
-
-If you want to remove repos, remove the repo as follows:
-
-    helm repo remove <alias>
-
-To install the <chart-name> chart:
-
-    helm install my-<chart-name> <alias>/<chart-name> -n <namespace>
-
-To install the <chart-name> chart:
-
-    helm upgrade my-<chart-name> <alias>/<chart-name> -n <namespace>
-
-  To uninstall the chart:
-
-    helm uninstall my-<chart-name> -n <namespace>
-
-    
+For more information follow instructions https://github.com/massmutual/swift-helm-charts/blob/main/README.md
