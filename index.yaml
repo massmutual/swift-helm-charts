@@ -3,6 +3,16 @@ entries:
   java-spring-boot:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-22T15:11:46.070767844Z"
+    description: A Helm chart for Kubernetes
+    digest: 8f04f150e6201819d3642e97131e6b2461da82ec2ca8f1ccd0f6ad5b290a77d7
+    name: java-spring-boot
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/java-spring-boot-0.1.1/java-spring-boot-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-20T16:26:56.018908692Z"
     description: A Helm chart for Kubernetes
     digest: 5f0172f153ca4299789ca93b0c81fbc64fc35e2b8728bab482111f107b5638f4
