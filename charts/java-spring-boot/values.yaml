@@ -2,6 +2,20 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+
+# Deployment type.
+
+bluegreen:
+    enabled: true
+    
+green:
+  enabled: true
+
+blue:
+  enabled: true
+
+productionSlot: green
+
 replicaCount: 3
 minReadySeconds: 35
 
@@ -65,6 +79,18 @@ ingress:
 
   hosts:
     - host: ingress.local
+      paths:
+        - path: /
+          pathType: Prefix
+          
+  hostsproduction:
+    - host: production.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+  hostsstage:
+    - host: stage.local
       paths:
         - path: /
           pathType: Prefix

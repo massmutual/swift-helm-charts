@@ -1,9 +1,9 @@
 {{- if .Values.bluegreen.enabled -}}
-{{ else }}
+{{ if .Values.blue.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "java-spring-boot.fullname" . }}
+  name: {{ include "java-spring-boot.fullname" . }}-blue
   labels:
     {{- include "java-spring-boot.labels" . | nindent 4 }}
 spec:
@@ -22,6 +22,7 @@ spec:
       {{- end }}
       labels:
         {{- include "java-spring-boot.selectorLabels" . | nindent 8 }}
+        slot: blue
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -31,7 +32,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "java-spring-boot.fullname" . }}-blue
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -61,5 +62,6 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+    {{- end }}
+{{- end }}
 {{- end }}

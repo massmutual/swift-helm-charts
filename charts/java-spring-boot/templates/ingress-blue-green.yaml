@@ -1,5 +1,4 @@
 {{- if .Values.bluegreen.enabled -}}
-{{ else }}
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "java-spring-boot.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
@@ -40,11 +39,12 @@ spec:
   {{- end }}
   defaultBackend:
     service:
-      name: {{ $fullName }}
+      name: {{ $fullName }}-service-prod
       port:
         number: {{ $svcPort }}
   rules:
-    {{- range .Values.ingress.hosts }}
+    {{- if .Values.ingress.hostsproduction }}
+    {{- range .Values.ingress.hostsproduction }}
     - host: {{ .host | quote }}
       http:
         paths:
@@ -56,14 +56,37 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ $fullName }}-service-prod
                 port:
                   number: {{ $svcPort }}
               {{- else }}
-              serviceName: {{ $fullName }}
+              serviceName: {{ $fullName }}-service-prod
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
     {{- end }}
+    {{- else }}
+  {{- range .Values.ingress.hostsstage }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .pathType }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}-service-stage
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}-service-stage
+              servicePort: {{ $svcPort }}
+              {{- end }}
+          {{- end }}
+    {{- end }}
+  {{- end }}
 {{- end }}
 {{- end }}
