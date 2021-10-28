@@ -3,9 +3,7 @@ kind: Pod
 metadata:
   name: "{{ include "java-spring-boot.fullname" . }}-test-connection"
   labels:
-    release: {{ .Release.Name }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: {{ template "java-spring-boot.name" . }}
+{{- include "java-spring-boot.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test
 spec:
