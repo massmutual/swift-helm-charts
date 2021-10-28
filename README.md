@@ -29,3 +29,11 @@ To install the <chart-name> chart:
   To uninstall the chart:
 
     helm uninstall my-<chart-name> -n <namespace>
+    
+  ## Contribute to exsisting charts or add chart.
+    
+   1. git clone swift-helm-charts repo.
+   2. create a branch from the main branch.
+   3. Add/configure the new charts.
+   4. Push your changes to git and create a pull request. Once the pull request is created the CI.yaml github action will run the tests on the charts.
+   5. Once the pull request is merged to main release.yaml will release the new version of the swift-helm-charts.
