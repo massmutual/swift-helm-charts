@@ -4,9 +4,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "java-spring-boot.fullname" . }}
   labels:
-    release: {{ .Release.Name }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: {{ template "java-spring-boot.name" . }}
+    {{- include "java-spring-boot.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
