@@ -1,10 +1,8 @@
-
 {{- if .Values.bluegreen.enabled -}}
-{{ else }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "java-spring-boot.fullname" . }}
+  name: {{ include "java-spring-boot.fullname" . }}-service-prod
   labels:
     {{- include "java-spring-boot.labels" . | nindent 4 }}
 spec:
@@ -15,5 +13,6 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "java-spring-boot.selectorLabels" . | nindent 4 }}
+ {{- include "java-spring-boot.selectorLabels" . | nindent 4 }}
+    slot: {{ .Values.productionSlot }}
 {{- end }}
