@@ -6,13 +6,13 @@
 # Deployment type.
 
 bluegreen:
-    enabled: true
+    enabled: false
     
 green:
   enabled: true
 
 blue:
-  enabled: true
+  enabled: false
 
 productionSlot: green
 
