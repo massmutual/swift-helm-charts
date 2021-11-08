@@ -8,13 +8,15 @@
 bluegreen:
     enabled: false
     
-green:
-  enabled: true
-
 blue:
   enabled: false
+  deploy: false
 
-productionSlot: green
+green:
+  enabled: false
+  deploy: false
+
+productionSlot: blue
 
 replicaCount: 3
 minReadySeconds: 35
