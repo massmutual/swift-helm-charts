@@ -3,6 +3,16 @@ entries:
   java-spring-boot:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-11-08T16:56:04.123545343Z"
+    description: A Helm chart for Kubernetes
+    digest: 6013d0044649711d6682831f6f48098091e77b74262f82ffd2b8ec8dd23a67ed
+    name: java-spring-boot
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/java-spring-boot-0.1.8/java-spring-boot-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-10-29T16:01:23.209344135Z"
     description: A Helm chart for Kubernetes
     digest: 000ec8ad48c2ce46462f21c91e3e03921525d991a9c9823b6b71d8f74dc41570
@@ -80,5 +90,16 @@ entries:
     type: application
     urls:
     - https://github.com/massmutual/swift-helm-charts/releases/download/java-spring-boot-0.1.0/java-spring-boot-0.1.0.tgz
+    version: 0.1.0
+  jboss-wildfly:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-11-08T16:56:04.331966966Z"
+    description: A Helm chart for Kubernetes
+    digest: cf38501bd8d7dbcb683823ebcfcc6fe8e01d24a8f5433694c356e97a40ae532d
+    name: jboss-wildfly
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/jboss-wildfly-0.1.0/jboss-wildfly-0.1.0.tgz
     version: 0.1.0
 generated: "2021-09-20T16:26:55.835997046Z"
