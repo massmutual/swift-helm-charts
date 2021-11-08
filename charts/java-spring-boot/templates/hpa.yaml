@@ -10,6 +10,11 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ include "java-spring-boot.fullname" . }}
+      selector:
+    matchLabels:
+          release: {{ .Release.Name }}
+          chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+          app: {{ template "java-spring-boot.name" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
