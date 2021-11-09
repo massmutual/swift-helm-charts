@@ -48,7 +48,7 @@ spec:
               port: http
           volumeMounts:
           - name: www
-            mountPath: /usr/share/nginx/html
+            mountPath: /opt/jboss/wildfly/standalone/deployments
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
