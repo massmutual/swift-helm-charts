@@ -34,6 +34,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+          - bash
+          - -c
+          - |
+            cp /var/tmp/*.war /opt/jboss/wildfly/standalone/deployments/.
+            /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
           ports:
             - name: http
               containerPort: {{ .Values.container.port }}
@@ -47,8 +53,8 @@ spec:
               path: {{ .Values.container.path }}
               port: http
           volumeMounts:
-          - name: www
-            mountPath: /usr/share/nginx/html
+          - name: data
+            mountPath: /opt/jboss/wildfly/standalone/data
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -66,7 +72,7 @@ spec:
 {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
-      name: www
+      name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: {{ .Values.persistence.storageClass | quote }}
