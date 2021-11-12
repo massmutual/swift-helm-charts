@@ -38,7 +38,7 @@ spec:
           - bash
           - -c
           - |
-            cp /var/tmp/*.war /opt/jboss/wildfly/standalone/deployments/.
+            #This command ensures override CMD command and help mount the "data" persistence volume before Application runs
             /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
           ports:
             - name: http
