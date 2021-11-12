@@ -33,11 +33,6 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          command:
-          - bash
-          - -c
-          - |
-            cp /var/tmp/*.war /opt/jboss/wildfly/standalone/deployments/
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -53,7 +48,7 @@ spec:
               port: http
           volumeMounts:
           - name: www
-            mountPath: /opt/jboss/wildfly/standalone/deployments
+            mountPath: /usr/share/nginx/html
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
