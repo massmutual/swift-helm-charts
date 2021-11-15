@@ -11,5 +11,6 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+  clusterIP: None
   selector:
     {{- include "jboss-wildfly.selectorLabels" . | nindent 4 }}
