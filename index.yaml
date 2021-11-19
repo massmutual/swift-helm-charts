@@ -212,4 +212,15 @@ entries:
     urls:
     - https://github.com/massmutual/swift-helm-charts/releases/download/jboss-wildfly-0.1.0/jboss-wildfly-0.1.0.tgz
     version: 0.1.0
+  nodejs:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-11-19T19:57:48.965015541Z"
+    description: A Helm chart for Kubernetes Blue/Green Deployment
+    digest: f1e784b7f3a40ce23cd1490b585ea0e586a569bcb03afc1c1ed86eca02ff3358
+    name: nodejs
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/nodejs-0.1.0/nodejs-0.1.0.tgz
+    version: 0.1.0
 generated: "2021-09-20T16:26:55.835997046Z"
