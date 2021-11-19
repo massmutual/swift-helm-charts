@@ -1,0 +1,18 @@
+{{- if .Values.bluegreen.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nodejs.fullname" . }}-service-prod
+  labels:
+    {{- include "nodejs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+ {{- include "nodejs.selectorLabels" . | nindent 4 }}
+    slot: {{ .Values.productionSlot }}
+{{- end }}
