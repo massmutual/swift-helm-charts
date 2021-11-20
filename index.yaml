@@ -212,6 +212,17 @@ entries:
     urls:
     - https://github.com/massmutual/swift-helm-charts/releases/download/jboss-wildfly-0.1.0/jboss-wildfly-0.1.0.tgz
     version: 0.1.0
+  mmkubeapps:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-11-20T11:44:39.256478968Z"
+    description: A Helm chart for Kubernetes
+    digest: 7ee41727a6ef056db6df49007ccf204060752d68e8cff5b3e60a89d3fb7c5014
+    name: mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/mmkubeapps-0.1.10/mmkubeapps-0.1.10.tgz
+    version: 0.1.10
   nodejs:
   - apiVersion: v2
     appVersion: 1.0.0
