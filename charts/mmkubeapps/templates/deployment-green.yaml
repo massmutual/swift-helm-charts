@@ -1,17 +1,20 @@
+{{ if .Values.bluegreen.enabled }}
+{{ if .Values.green.enabled }}
+{{ if .Values.green.deploy.true }}
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: {{ include "jboss-wildfly.fullname" . }}
+  name: {{ include "mmkubeapps.fullname" . }}-green
   labels:
-    {{- include "jboss-wildfly.labels" . | nindent 4 }}
+    {{- include "mmkubeapps.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ include "jboss-wildfly.fullname" . }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "jboss-wildfly.selectorLabels" . | nindent 6 }}
+      {{- include "mmkubeapps.selectorLabels" . | nindent 6 }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,27 +22,22 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "jboss-wildfly.selectorLabels" . | nindent 8 }}
+        {{- include "mmkubeapps.selectorLabels" . | nindent 8 }}
+        slot: green
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "jboss-wildfly.serviceAccountName" . }}
+      serviceAccountName: {{ include "mmkubeapps.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "mmkubeapps.fullname" . }}-green
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-          - bash
-          - -c
-          - |
-            #This command ensures override CMD command and help mount the "data" persistence volume before Application runs
-            /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0
           ports:
             - name: http
               containerPort: {{ .Values.container.port }}
@@ -52,12 +50,6 @@ spec:
             httpGet:
               path: {{ .Values.container.path }}
               port: http
-          volumeMounts:
-          - name: data
-            mountPath: /opt/jboss/wildfly/standalone/data
-          - name: config
-            mountPath: "/config"
-            readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -72,18 +64,6 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-      - name: config
-        configMap:
-          name: {{ template "jboss-wildfly.fullname" . }}-config
-{{- if .Values.persistence.enabled }}
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: {{ .Values.persistence.storageClass | quote }}
-      resources:
-        requests:
-          storage: {{ .Values.persistence.configStorage.size }}
-{{- end }}          
+{{- end }}
+{{- end }}
+{{- end }}
