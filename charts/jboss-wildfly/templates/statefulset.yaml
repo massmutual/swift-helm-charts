@@ -55,6 +55,9 @@ spec:
           volumeMounts:
           - name: data
             mountPath: /opt/jboss/wildfly/standalone/data
+          - name: config
+            mountPath: "/config"
+            readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -69,6 +72,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ template "jboss-wildfly.fullname" . }}-config
 {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
