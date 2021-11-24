@@ -70,5 +70,5 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: {{ template "jboss-wildfly.fullname" . }}-config
+          name: {{ template "mmkubeapps.fullname" . }}-config
 {{- end }}
