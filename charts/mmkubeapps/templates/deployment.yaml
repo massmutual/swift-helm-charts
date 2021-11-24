@@ -52,7 +52,6 @@ spec:
           - name: config
             mountPath: "/config"
             readOnly: true
-
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
