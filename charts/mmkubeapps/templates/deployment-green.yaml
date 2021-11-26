@@ -50,6 +50,10 @@ spec:
             httpGet:
               path: {{ .Values.container.path }}
               port: http
+          volumeMounts:
+          - name: config
+            mountPath: "/config"
+            readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -64,6 +68,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ template "mmkubeapps.fullname" . }}-config
 {{- end }}
 {{- end }}
 {{- end }}
