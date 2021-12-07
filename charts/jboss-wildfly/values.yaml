@@ -27,6 +27,9 @@ serviceAccount:
 
 podAnnotations: {}
 
+configMap:
+  enabled: false
+
 podSecurityContext:
   fsGroup: 2000
 
