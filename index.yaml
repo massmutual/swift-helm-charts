@@ -104,6 +104,16 @@ entries:
   jboss-wildfly:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-12-08T00:46:56.473897538Z"
+    description: A Helm chart for Kubernetes
+    digest: 3ce0eebed99c3c31a4a00bc8aecdc64ba1497510675e4baea570802c89a292f4
+    name: jboss-wildfly
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/jboss-wildfly-0.1.16/jboss-wildfly-0.1.16.tgz
+    version: 0.1.16
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-11-24T16:10:18.93072885Z"
     description: A Helm chart for Kubernetes
     digest: 484e3b9e86b1704d1e3896c33cc06cfbe21d8ee97e8f3923f90ddf68a2723794
