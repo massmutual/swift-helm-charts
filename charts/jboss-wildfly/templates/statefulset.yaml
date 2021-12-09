@@ -34,6 +34,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: context_path
+            value: {{ .Values.container.path }}
           command:
           - bash
           - -c
@@ -55,9 +58,11 @@ spec:
           volumeMounts:
           - name: data
             mountPath: /opt/jboss/wildfly/standalone/data
+          {{- if .Values.configMap.enabled }}
           - name: config
             mountPath: "/config"
             readOnly: true
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -72,10 +77,12 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.configMap.enabled }}
       volumes:
       - name: config
         configMap:
           name: {{ template "jboss-wildfly.fullname" . }}-config
+      {{- end }}
 {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
