@@ -1,6 +1,6 @@
 {{ if .Values.bluegreen.enabled }}
 {{ if .Values.green.enabled }}
-{{ if .Values.green.deploy }}
+{{ if .Values.green.deploy.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
