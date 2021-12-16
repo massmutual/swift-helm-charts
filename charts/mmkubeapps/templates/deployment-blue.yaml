@@ -41,6 +41,8 @@ spec:
           env:
           - name: context_path
             value: {{ .Values.container.path }}
+          - name: container_port
+            value: {{ .Values.container.port }}
           ports:
             - name: http
               containerPort: {{ .Values.container.port }}
