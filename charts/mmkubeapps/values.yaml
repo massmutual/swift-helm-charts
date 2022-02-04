@@ -27,9 +27,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.5"
   
-
-imagePullSecrets: 
-  - name: artifactorycred
+# imagePullSecrets: 
+#   - name: artifactorycred
 nameOverride: "mmkubeapps"
 fullnameOverride: "mmkubeapps"
 

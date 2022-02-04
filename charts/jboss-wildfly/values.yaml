@@ -11,8 +11,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.0.0"
 
-imagePullSecrets: 
-  - name: artifactorycred
+# imagePullSecrets: 
+#   - name: artifactorycred
 nameOverride: "jboss-wildfly"
 fullnameOverride: "jboss-wildfly"
 

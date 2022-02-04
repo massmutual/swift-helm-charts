@@ -25,10 +25,8 @@ spec:
         {{- include "mmkubeapps.selectorLabels" . | nindent 8 }}
         slot: blue
     spec:
-      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: {{ template "mmkubeapps.fullname" . }}-imagepullsecret
       serviceAccountName: {{ include "mmkubeapps.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}

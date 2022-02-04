@@ -21,10 +21,8 @@ spec:
       labels:
         {{- include "jboss-wildfly.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: {{ template "jboss-wildfly.fullname" . }}-imagepullsecret
       serviceAccountName: {{ include "jboss-wildfly.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
