@@ -1,0 +1,7 @@
+---
+schema: 1
+orgName: cloud-and-devops-engineering
+integrationName: github-enterprise
+tags:
+  application: swift
+  team: CPE
