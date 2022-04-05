@@ -22,10 +22,10 @@ replicaCount: 3
 minReadySeconds: 35
 
 image:
-  repository: artifactory.awsmgmt.massmutual.com/daas-swift-docker/mmkubeapps-hello
+  repository: artifactory.example.com/docker-account/dockerimagename
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.5"
+  tag: "1.0.0"
   
 # imagePullSecrets: 
 #   - name: artifactorycred
@@ -72,9 +72,9 @@ ingress:
     kubernetes.io/ingress.class: "alb"
     alb.ingress.kubernetes.io/scheme: internal
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/subnets: subnet-02588ba8b031a5630, subnet-04310931ebea92d6d, subnet-0b1038e076ce2d45d
-    external-dns.alpha.kubernetes.io/hostname: alpine.nsawssnd.massmutual.com
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:590360573099:certificate/c737dc60-afc4-48fc-816e-a0a9fe2d5012
+    alb.ingress.kubernetes.io/subnets: subnet-1, subnet-2, subnet-3
+    external-dns.alpha.kubernetes.io/hostname: test.sandbox.example.com
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:xxxxxxxx:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/healthcheck-path: /greeting
     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
@@ -116,7 +116,7 @@ resources: {}
 autoscaling:
   enabled: false
   minReplicas: 3
-  maxReplicas: 100
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
