@@ -125,3 +125,21 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+secretsmanager:
+  enabled: false
+env:
+  normal:    
+  #   env1: "value1"
+  #   env2: "value2"
+  # secret:
+  #   secret-name-from-secret-manager1:
+  #     key:
+  #       - envName1
+  #   secret-name-from-secret-manager2:
+  #     key:
+  #       - envname2        
+  #       - envName2
+
+
+    
