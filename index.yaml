@@ -335,6 +335,16 @@ entries:
   mmkubeapps:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-09T17:14:52.632997264Z"
+    description: A Helm chart for Kubernetes
+    digest: 02b27e718823a032887314801ae1095da31ed3ff61135d8bdfff0e7ac62aabdf
+    name: mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/mmkubeapps-0.1.28/mmkubeapps-0.1.28.tgz
+    version: 0.1.28
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-08T18:18:45.067604324Z"
     description: A Helm chart for Kubernetes
     digest: f86299a4a34149d16cff01949306182d003eb1e6a5d3f3aa6de6aefd0281cf60
