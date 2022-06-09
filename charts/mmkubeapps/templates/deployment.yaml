@@ -1,20 +1,20 @@
-{{- $releaseRevision := include "mmkubeapps.releaseRevision" . }}
+{{- $releaseRevision := include "jboss-wildfly.releaseRevision" . }}
 
 {{- if .Values.bluegreen.enabled -}}
 {{ else }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "mmkubeapps.fullname" . }}
+  name: {{ include "jboss-wildfly.fullname" . }}
   labels:
-    {{- include "mmkubeapps.labels" . | nindent 4 }}
+    {{- include "jboss-wildfly.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "mmkubeapps.selectorLabels" . | nindent 6 }}
+      {{- include "jboss-wildfly.selectorLabels" . | nindent 6 }}
   minReadySeconds: {{ .Values.minReadySeconds }}
   template:
     metadata:
@@ -23,11 +23,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "mmkubeapps.selectorLabels" . | nindent 8 }}
+        {{- include "jboss-wildfly.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
-        - name: {{ template "mmkubeapps.fullname" . }}-imagepullsecret
-      serviceAccountName: {{ include "mmkubeapps.serviceAccountName" . }}
+        - name: {{ template "jboss-wildfly.fullname" . }}-imagepullsecret
+      serviceAccountName: {{ include "jboss-wildfly.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -44,7 +44,7 @@ spec:
             readOnly: true
           {{- end }}
           {{- if .Values.secretsmanager.enabled }}
-          - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+          - name: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }}
             mountPath: "/mnt/secrets-store"
             readOnly: true
           {{- end }} 
@@ -88,15 +88,15 @@ spec:
       {{- if .Values.configMap.enabled }}
       - name: config
         configMap:
-          name: {{ template "mmkubeapps.fullname" . }}-config
+          name: {{ template "jboss-wildfly.fullname" . }}-config
       {{- end }}
       {{- if .Values.secretsmanager.enabled }}
-      - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+      - name: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }}
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
+            secretProviderClass: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
       {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
