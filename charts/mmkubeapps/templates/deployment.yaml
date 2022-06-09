@@ -36,18 +36,19 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.configMap.enabled }}
+          {{- if or .Values.configMap.enabled .Values.secretsmanager.enabled }}
           volumeMounts:
+          {{- if .Values.configMap.enabled }}
           - name: config
             mountPath: "/config"
             readOnly: true
           {{- end }}
           {{- if .Values.secretsmanager.enabled }}
-          volumeMounts:
           - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
             mountPath: "/mnt/secrets-store"
             readOnly: true
           {{- end }} 
+          {{- end }}
           env:
             - name: context_path
               value: {{ .Values.container.path }}
@@ -82,20 +83,21 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if .Values.configMap.enabled }}
+      {{- if or .Values.configMap.enabled .Values.configMap.enabled }}
       volumes:
+      {{- if .Values.configMap.enabled }}
       - name: config
         configMap:
           name: {{ template "mmkubeapps.fullname" . }}-config
       {{- end }}
       {{- if .Values.secretsmanager.enabled }}
-      volumes:
       - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
             secretProviderClass: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
+      {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
