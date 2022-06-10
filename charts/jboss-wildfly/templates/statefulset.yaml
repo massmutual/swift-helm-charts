@@ -1,4 +1,4 @@
-{{- $releaseRevision := include "mmkubeapps.releaseRevision" . }}
+{{- $releaseRevision := include "jboss-wildfly.releaseRevision" . }}
 
 apiVersion: apps/v1
 kind: StatefulSet
@@ -81,7 +81,7 @@ spec:
             readOnly: true
           {{- end }}
           {{- if .Values.secretsmanager.enabled }}
-          - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+          - name: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }}
             mountPath: "/mnt/secrets-store"
             readOnly: true
           {{- end }} 
@@ -92,15 +92,15 @@ spec:
       {{- if .Values.configMap.enabled }}
       - name: config
         configMap:
-          name: {{ template "mmkubeapps.fullname" . }}-config
+          name: {{ template "jboss-wildfly.fullname" . }}-config
       {{- end }}
       {{- if .Values.secretsmanager.enabled }}
-      - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+      - name: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }}
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
+            secretProviderClass: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
       {{- end }}
       {{- end }}
 
@@ -121,15 +121,15 @@ spec:
       {{- if .Values.configMap.enabled }}
       - name: config
         configMap:
-          name: {{ template "mmkubeapps.fullname" . }}-config
+          name: {{ template "jboss-wildfly.fullname" . }}-config
       {{- end }}
       {{- if .Values.secretsmanager.enabled }}
-      - name: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+      - name: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }}
         csi:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: {{ include "mmkubeapps.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
+            secretProviderClass: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
       {{- end }}
       {{- end }}
 
