@@ -116,7 +116,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if or .Values.configMap.enabled .Values.configMap.enabled }}
+      {{- if or .Values.configMap.enabled .Values.secretsmanager.enabled }}
       volumes:
       {{- if .Values.configMap.enabled }}
       - name: config
