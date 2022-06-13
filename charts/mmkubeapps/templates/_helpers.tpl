@@ -30,6 +30,10 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+{{- define "mmkubeapps.releaseRevision" -}}
+{{ .Release.Revision }}
+{{- end }}
+
 {{/*
 Common labels
 */}}
@@ -48,6 +52,13 @@ Selector labels
 {{- define "mmkubeapps.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "mmkubeapps.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+{{/*
+SecretManager labels
+*/}}
+{{- define "mmkubeapps.secretsManagerLabels" -}}
+aws.secrets-manager/enabled: "true"
+{{ include "mmkubeapps.selectorLabels" . }}
 {{- end }}
 
 {{/*

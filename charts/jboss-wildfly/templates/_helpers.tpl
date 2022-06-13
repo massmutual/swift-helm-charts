@@ -30,6 +30,10 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+{{- define "jboss-wildfly.releaseRevision" -}}
+{{ .Release.Revision }}
+{{- end }}
+
 {{/*
 Common labels
 */}}
@@ -49,6 +53,14 @@ Selector labels
 app.kubernetes.io/name: {{ include "jboss-wildfly.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+{{/*
+SecretManager labels
+*/}}
+{{- define "jboss-wildfly.secretsManagerLabels" -}}
+aws.secrets-manager/enabled: "true"
+{{ include "jboss-wildfly.selectorLabels" . }}
+{{- end }}
+
 
 {{/*
 Create the name of the service account to use
