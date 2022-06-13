@@ -87,7 +87,7 @@ spec:
           {{- end }} 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if or .Values.configMap.enabled .Values.configMap.enabled }}
+      {{- if or .Values.configMap.enabled .Values.secretsmanager.enabled }}
       volumes:
       {{- if .Values.configMap.enabled }}
       - name: config
