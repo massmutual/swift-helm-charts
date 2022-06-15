@@ -23,6 +23,7 @@ minReadySeconds: 35
 
 livenessProbe: {}
 readinessProbe: {}
+startupProbe: {}
 
 image:
   repository: artifactory.example.com/docker-account/dockerimagename
