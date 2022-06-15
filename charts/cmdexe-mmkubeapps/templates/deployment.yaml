@@ -71,9 +71,9 @@ spec:
             - name: http
               containerPort: {{ .Values.container.port }}
               protocol: TCP
-          # livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.livenessProbe "context" $) | nindent 12 }}
-          livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.livenessProbe "context" $) | nindent 12 }}
+          # livenessProbe:
+          #   {{- toYaml .Values.livenessProbe | nindent 12 }}
           # livenessProbe:
           #   httpGet:
           #     path: {{ .Values.container.path }}
