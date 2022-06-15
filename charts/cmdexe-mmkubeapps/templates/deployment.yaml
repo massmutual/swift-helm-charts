@@ -76,10 +76,10 @@ spec:
           #   httpGet:
           #     path: {{ .Values.container.path }}
           #     port: http
-          readinessProbe:
-            httpGet:
-              path: {{ .Values.container.path }}
-              port: http
+          readinessProbe:  {{- include "common.tplvalues.render" (dict "value" .Values.readinessProbe "context" $) | nindent 12 }}
+            # httpGet:
+            #   path: {{ .Values.container.path }}
+            #   port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if or .Values.configMap.enabled .Values.configMap.enabled }}
