@@ -82,8 +82,9 @@ spec:
             # httpGet:
             #   path: {{ .Values.container.path }}
             #   port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.resources "context" $) | nindent 12 }}
+          # resources:
+          #   {{- toYaml .Values.resources | nindent 12 }}
       {{- if or .Values.configMap.enabled .Values.configMap.enabled }}
       volumes:
       {{- if .Values.configMap.enabled }}
