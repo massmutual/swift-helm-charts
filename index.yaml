@@ -13,6 +13,22 @@ entries:
     version: 0.1.30
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-15T14:52:27.597289789Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 8add1bb5e6f0d9af446822f1ba78153149778abf286caf1ef630fb0f421efe70
+    name: cmdexe-mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.1/cmdexe-mmkubeapps-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-15T14:24:24.857425558Z"
     description: A Helm chart for Kubernetes
     digest: 85acfcde7e7bd437a3bbf463ffb5b31e6559e6cd7101b77676a210fc5c0b30bb
