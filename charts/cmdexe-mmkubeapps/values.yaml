@@ -21,6 +21,12 @@ productionSlot: blue
 replicaCount: 3
 minReadySeconds: 35
 
+customLivenessProbe:
+  httpGet:
+    path: /greeting
+    port: 8080
+
+
 image:
   repository: artifactory.example.com/docker-account/dockerimagename
   pullPolicy: IfNotPresent
