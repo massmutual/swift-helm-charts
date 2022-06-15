@@ -13,6 +13,22 @@ entries:
     version: 0.1.30
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-15T17:42:27.828083429Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      tags:
+      - massmutual-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 1c276c9db32446f91c9d3d7b3ea9558eaf5c95856c4db7e9710ca8aa6e2fa64a
+    name: cmdexe-mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.2/cmdexe-mmkubeapps-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-15T14:52:27.597289789Z"
     dependencies:
     - name: common
@@ -37,6 +53,31 @@ entries:
     urls:
     - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.0/cmdexe-mmkubeapps-0.1.0.tgz
     version: 0.1.0
+  common:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-15T17:42:27.966209146Z"
+    description: A Library Helm Chart for grouping common logic between  charts. This chart is not deployable by itself.
+    digest: 96076d7f0f7621191ca890bc151c2651981b9c57de4103fe97fcbbf4acf04e30
+    home: https://github.com/massmutual/swift-helm-charts/tree/main/charts/common
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    - bitnami
+    maintainers:
+    - name: MassMutual
+      url: https://github.com/massmutual/swift-helm-charts
+    name: common
+    sources:
+    - https://github.com/massmutual/swift-helm-charts
+    type: library
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/common-1.16.0/common-1.16.0.tgz
+    version: 1.16.0
   java-spring-boot:
   - apiVersion: v2
     appVersion: 1.16.0
