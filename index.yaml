@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  cmdexe-mmkubeapps:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-15T12:34:22.2462469Z"
+    description: A Helm chart for Kubernetes
+    digest: becf285e2291af8161d3547c80bec73e8594d263fffcba2f68056adc828b408b
+    name: cmdexe-mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.30/cmdexe-mmkubeapps-0.1.30.tgz
+    version: 0.1.30
   java-spring-boot:
   - apiVersion: v2
     appVersion: 1.16.0
