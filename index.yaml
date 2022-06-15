@@ -11,6 +11,16 @@ entries:
     urls:
     - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.30/cmdexe-mmkubeapps-0.1.30.tgz
     version: 0.1.30
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-15T14:24:24.857425558Z"
+    description: A Helm chart for Kubernetes
+    digest: 85acfcde7e7bd437a3bbf463ffb5b31e6559e6cd7101b77676a210fc5c0b30bb
+    name: cmdexe-mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.0/cmdexe-mmkubeapps-0.1.0.tgz
+    version: 0.1.0
   java-spring-boot:
   - apiVersion: v2
     appVersion: 1.16.0
