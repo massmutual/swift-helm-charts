@@ -21,18 +21,7 @@ productionSlot: blue
 replicaCount: 3
 minReadySeconds: 35
 
-livenessProbe:
-  httpGet:
-    path: /greeting
-    port: 8080
-    # httpHeaders:
-    # - name: Custom-Header
-    #   value: Awesome
-  initialDelaySeconds: 180
-  periodSeconds: 20
-  timeoutSeconds: 5
-  failureThreshold: 6
-  successThreshold: 1
+livenessProbe: {}
 
 image:
   repository: artifactory.example.com/docker-account/dockerimagename
