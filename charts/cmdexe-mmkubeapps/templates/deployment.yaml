@@ -48,10 +48,6 @@ spec:
           {{- end }} 
           {{- end }}
           env:
-            - name: context_path
-              value: {{ .Values.container.path }}
-            - name: container_port
-              value: "{{ .Values.container.port }}"
             {{- range $key, $val := .Values.env.normal }}
             - name: {{ $key }}
               value: {{ $val | quote}}
@@ -67,22 +63,9 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.container.port }}
-              protocol: TCP
           startupProbe: {{- include "common.tplvalues.render" (dict "value" .Values.startupProbe "context" $) | nindent 12 }} 
           livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.livenessProbe "context" $) | nindent 12 }}
-          # livenessProbe:
-          #   {{- toYaml .Values.livenessProbe | nindent 12 }}
-          # livenessProbe:
-          #   httpGet:
-          #     path: {{ .Values.container.path }}
-          #     port: http
           readinessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.readinessProbe "context" $) | nindent 12 }}
-            # httpGet:
-            #   path: {{ .Values.container.path }}
-            #   port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if or .Values.configMap.enabled .Values.configMap.enabled }}
