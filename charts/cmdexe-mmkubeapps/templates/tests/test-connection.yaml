@@ -10,6 +10,6 @@ spec:
   containers:
     - name: wget
       image: busybox
-      command: ['wget']
-      args: ['{{ include "cmdexe-mmkubeapps.fullname" . }}:{{ .Values.service.port }}']
+      command: ['ls']
+      args: ['{{ include "cmdexe-mmkubeapps.fullname" . }}:{{ "/tmp/healthy" }}']
   restartPolicy: Never
