@@ -13,6 +13,22 @@ entries:
     version: 0.1.30
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-16T17:00:09.427951863Z"
+    dependencies:
+    - name: common
+      repository: file://../common
+      tags:
+      - massmutual-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 79930f74d8bf9e880be20724cab089ea77fdf0de515ea930d5a2c5ca2e0ee3b8
+    name: cmdexe-mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/cmdexe-mmkubeapps-0.1.12/cmdexe-mmkubeapps-0.1.12.tgz
+    version: 0.1.12
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-16T14:37:32.528436093Z"
     dependencies:
     - name: common
