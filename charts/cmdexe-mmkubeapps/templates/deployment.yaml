@@ -66,10 +66,8 @@ spec:
           livenessProbe:
             exec:
               command:
-              - /bin/bash
-              - -c
-              - |
-                ls /tmp/healthy
+              - cat
+              - /usr/share/nginx/html/index.html
             initialDelaySeconds: 10
             periodSeconds: 20
             timeoutSeconds: 5
@@ -79,10 +77,8 @@ spec:
           readinessProbe:
             exec:
               command:
-              - /bin/bash
-              - -c
-              - |
-                ls /tmp/healthy
+              - cat
+              - /usr/share/nginx/html/index.html
             initialDelaySeconds: 10
             periodSeconds: 20
             timeoutSeconds: 5
