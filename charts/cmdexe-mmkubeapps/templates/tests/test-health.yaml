@@ -11,5 +11,5 @@ spec:
     - name: ls
       image: busybox
       command: ['ls']
-      args: ['{{ include "cmdexe-mmkubeapps.fullname" . }}:{{ "/tmp/healthy" }}']
+      args: ['{{ include "cmdexe-mmkubeapps.fullname" . }}:{{ "/usr/share/nginx/html/index.html" }}']
   restartPolicy: Never
