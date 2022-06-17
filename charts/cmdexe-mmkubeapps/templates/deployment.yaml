@@ -48,10 +48,6 @@ spec:
           {{- end }} 
           {{- end }}
           env:
-            # - name: context_path
-            #   value: {{ .Values.container.path }}
-            # - name: container_port
-            #   value: "{{ .Values.container.port }}"
             {{- range $key, $val := .Values.env.normal }}
             - name: {{ $key }}
               value: {{ $val | quote}}
@@ -67,18 +63,6 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-          # ports:
-          #   - name: http
-          #     containerPort: {{ .Values.container.port }}
-          #     protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: {{ .Values.container.path }}
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: {{ .Values.container.path }}
-          #     port: http
           livenessProbe:
             exec:
               command:
