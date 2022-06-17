@@ -74,16 +74,16 @@ spec:
           #   failureThreshold: 6
           #   successThreshold: 1
 
-          readinessProbe:
-            exec:
-              command:
-              - cat
-              - /tmp/healthy
-            initialDelaySeconds: 10
-            periodSeconds: 20
-            timeoutSeconds: 5
-            failureThreshold: 6
-            successThreshold: 1
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #     - cat
+          #     - /tmp/healthy
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 20
+          #   timeoutSeconds: 5
+          #   failureThreshold: 6
+          #   successThreshold: 1
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
