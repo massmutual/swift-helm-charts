@@ -63,16 +63,16 @@ spec:
             {{- end }}
             {{- end }}
             {{- end }}
-          livenessProbe:
-            exec:
-              command:
-              - cat
-              - /tmp/healthy
-            initialDelaySeconds: 5
-            periodSeconds: 20
-            timeoutSeconds: 5
-            failureThreshold: 6
-            successThreshold: 1
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #     - cat
+          #     - /tmp/healthy
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 20
+          #   timeoutSeconds: 5
+          #   failureThreshold: 6
+          #   successThreshold: 1
 
           readinessProbe:
             exec:
