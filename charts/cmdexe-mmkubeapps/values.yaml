@@ -5,9 +5,9 @@
 replicaCount: 1
 minReadySeconds: 10
 
-startupProbe: {}
-livenessProbe: {}
-readinessProbe: {}
+# startupProbe: {}
+# livenessProbe: {}
+# readinessProbe: {}
 
 image:
   repository: artifactory.example.com/docker-account/dockerimagename
