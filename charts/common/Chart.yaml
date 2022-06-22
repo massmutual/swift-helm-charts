@@ -1,0 +1,22 @@
+annotations:
+  category: Infrastructure
+apiVersion: v2
+# Please make sure that version and appVersion are always the same.
+appVersion: 1.16.0
+description: A Library Helm Chart for grouping common logic between  charts. This chart is not deployable by itself.
+home: https://github.com/massmutual/swift-helm-charts/tree/main/charts/common
+icon: 
+keywords:
+  - common
+  - helper
+  - template
+  - function
+  - bitnami
+maintainers:
+  - name: MassMutual
+    url: https://github.com/massmutual/swift-helm-charts
+name: common
+sources:
+  - https://github.com/massmutual/swift-helm-charts
+type: library
+version: 1.16.0

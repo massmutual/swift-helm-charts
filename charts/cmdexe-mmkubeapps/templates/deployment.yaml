@@ -1,0 +1,134 @@
+{{- $releaseRevision := include "cmdexe-mmkubeapps.releaseRevision" . }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cmdexe-mmkubeapps.fullname" . }}
+  labels:
+    {{- include "cmdexe-mmkubeapps.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "cmdexe-mmkubeapps.selectorLabels" . | nindent 6 }}
+  minReadySeconds: {{ .Values.minReadySeconds }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "cmdexe-mmkubeapps.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ template "cmdexe-mmkubeapps.fullname" . }}-imagepullsecret
+      serviceAccountName: {{ include "cmdexe-mmkubeapps.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if or .Values.configMap.enabled .Values.secretsmanager.enabled }}
+          volumeMounts:
+          {{- if .Values.configMap.enabled }}
+          - name: config
+            mountPath: "/config"
+            readOnly: true
+          {{- end }}
+          {{- if .Values.secretsmanager.enabled }}
+          - name: {{ include "cmdexe-mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+          {{- end }} 
+          {{- end }}
+          env:
+            {{- range $key, $val := .Values.env.normal }}
+            - name: {{ $key }}
+              value: {{ $val | quote}}
+            {{- end }}
+            {{- if .Values.secretsmanager.enabled }}
+            {{- range $key, $val := .Values.env.secret }}
+            {{- range $val.key }}
+            - name: {{ . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $key }}-{{ $releaseRevision }}
+                  key: {{ . }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+          {{- if .Values.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.startupProbe.path }}
+              port: {{ .Values.startupProbe.port }}
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
+          {{- else if .Values.customStartupProbe }}
+          startupProbe: {{- include "common.tplvalues.render" (dict "value" .Values.customStartupProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: {{ .Values.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          {{- else if .Values.customLivenessProbe }}
+          livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.customLivenessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          {{- else if .Values.customReadinessProbe }}
+          readinessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.customReadinessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- if or .Values.configMap.enabled .Values.secretsmanager.enabled }}
+      volumes:
+      {{- if .Values.configMap.enabled }}
+      - name: config
+        configMap:
+          name: {{ template "cmdexe-mmkubeapps.fullname" . }}-config
+      {{- end }}
+      {{- if .Values.secretsmanager.enabled }}
+      - name: {{ include "cmdexe-mmkubeapps.fullname" . }}-{{ $releaseRevision }}
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: {{ include "cmdexe-mmkubeapps.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
+      {{- end }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
