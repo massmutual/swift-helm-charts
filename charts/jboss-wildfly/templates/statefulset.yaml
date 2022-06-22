@@ -55,7 +55,7 @@ spec:
             {{- end }}
             {{- end }}
           command:
-          - bash
+          - sh
           - -c
           - |
             #This command ensures override CMD command and help mount the "data" persistence volume before Application runs
