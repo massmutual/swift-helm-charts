@@ -646,6 +646,16 @@ entries:
   jboss-wildfly:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-24T01:17:24.680392016Z"
+    description: A Helm chart for Kubernetes
+    digest: 489bd36f7954bf1b9699a032a540d60bc4056e87f4f403eb9c631d8368d659e7
+    name: jboss-wildfly
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/jboss-wildfly-0.1.33/jboss-wildfly-0.1.33.tgz
+    version: 0.1.33
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-22T22:07:57.164960423Z"
     description: A Helm chart for Kubernetes
     digest: e31a4512657dfe25578478a49fa5433f3a803e76f2c556e0ca8508ef3c3a869c
@@ -915,6 +925,16 @@ entries:
     - https://github.com/massmutual/swift-helm-charts/releases/download/jboss-wildfly-0.1.0/jboss-wildfly-0.1.0.tgz
     version: 0.1.0
   mmkubeapps:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-24T01:17:24.82563927Z"
+    description: A Helm chart for Kubernetes
+    digest: d66441bebe37bb351f73cec316aec277abe7566105e4a79403c578b478188ba7
+    name: mmkubeapps
+    type: application
+    urls:
+    - https://github.com/massmutual/swift-helm-charts/releases/download/mmkubeapps-0.1.32/mmkubeapps-0.1.32.tgz
+    version: 0.1.32
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-06-23T16:33:59.998515067Z"
