@@ -134,7 +134,6 @@ spec:
             secretProviderClass: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
       {{- end }}
       {{- end }}
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -146,22 +145,6 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- if or .Values.configMap.enabled .Values.secretsmanager.enabled }}
-      volumes:
-      {{- if .Values.configMap.enabled }}
-      - name: config
-        configMap:
-          name: {{ template "jboss-wildfly.fullname" . }}-config
-      {{- end }}
-      {{- if .Values.secretsmanager.enabled }}
-      - name: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }}
-        csi:
-          driver: secrets-store.csi.k8s.io
-          readOnly: true
-          volumeAttributes:
-            secretProviderClass: {{ include "jboss-wildfly.fullname" . }}-{{ $releaseRevision }} # Name of the secretProviderClass
-      {{- end }}
       {{- end }}
 
 {{- if .Values.persistence.enabled }}
